@@ -31,9 +31,10 @@ VALIDATE(){
         exit 1
     else
         echo "$2 ... SUCCESS" | tee -a $LOGS_FILE
+        exit 1
     else
        echo " $2 ....already installed ...skipping "    
-       
+
  fi
 }
 
