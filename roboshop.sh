@@ -31,10 +31,12 @@ valadiate(){
 
 
 dnf install nginx -y
-valadaiate $? " installing nginx "
+validate $? " installing nginx "
+sleep=10
 
 dnf install mysql -y
 VALIDATE $? "Installing Mysql"
+sleep=10
 
 dnf install nodejs -y
 VALIDATE $? "Installing nodejs"
