@@ -1,7 +1,7 @@
 #!/bin/bash
 
 present=$(pwd)
-LOGS_FOLDER="var/logs/roboshop/"
+LOGS_FOLDER="/var/logs/roboshop/"
 LOGS_FILE="/var/logs/roboshop/.$0.logs"
 sg_id=sg-00b80ff8ce8c7583c
 ami_Id=ami-0220d79f3f480ecf5
@@ -15,10 +15,11 @@ if [ $user_id -ne 0 ]; then
   echo "use root user"
   exit 1
   echo " sudo user "
+  fi
 
 mkdir -p $LOGS_FOLDER
 
-fi
+
 
 log(){
     echo -e "$(date "+%Y-%m-%d %H:%M:%S") | $1" | tee -a $LOGS_FILE
@@ -36,11 +37,10 @@ VALIDATE(){
 
 dnf install nginx -y
 VALIDATE $? "installing nginx" | tee -a $LOGS_FILE
-sleep=10
-
+sleep 10
 dnf install mysql -y
 VALIDATE $? "Installing Mysql" | tee -a $LOGS_FILE
-sleep=10
+sleep 10
 
 dnf install nodejs -y
 VALIDATE $? "Installing nodejs" | tee -a $LOGS_FILE
@@ -59,4 +59,8 @@ do
 done
 
 
-aws ec2 run-instances --image-id $ami_id --instance-type t3.micro --security-group-ids $sg_id --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]"
+aws ec2 run-instances \
+--image-id $ami_id \
+--instance-type t3.micro \
+--security-group-ids $sg_id \
+--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]"
