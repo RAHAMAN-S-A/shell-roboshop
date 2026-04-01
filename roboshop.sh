@@ -4,7 +4,7 @@ present=$(pwd)
 LOGS_FOLDER="/var/logs/roboshop/"
 LOGS_FILE="/var/logs/roboshop/.$0.logs"
 sg_id=sg-00b80ff8ce8c7583c
-ami_Id=
+ami_id=ami-0220d79f3f480ecf5
 
 user_id=$(id -u)
 
@@ -31,7 +31,10 @@ VALIDATE(){
         exit 1
     else
         echo "$2 ... SUCCESS" | tee -a $LOGS_FILE
-    fi
+    else
+       echo " $2 ....already installed ...skipping "    
+       
+ fi
 }
 
 
@@ -63,5 +66,4 @@ aws ec2 run-instances \
 --image-id $ami_id \
 --instance-type t3.micro \
 --security-group-ids $sg_id \
---tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]"/
---output text
+--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]"
