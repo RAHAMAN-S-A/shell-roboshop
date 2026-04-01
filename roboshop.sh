@@ -4,7 +4,7 @@ present=$(pwd)
 LOGS_FOLDER="/var/logs/roboshop/"
 LOGS_FILE="/var/logs/roboshop/.$0.logs"
 sg_id=sg-00b80ff8ce8c7583c
-ami_Id=ami-0220d79f3f480ecf5
+ami_Id=
 
 user_id=$(id -u)
 
@@ -63,4 +63,5 @@ aws ec2 run-instances \
 --image-id $ami_id \
 --instance-type t3.micro \
 --security-group-ids $sg_id \
---tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]"
+--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]"/
+--output text
