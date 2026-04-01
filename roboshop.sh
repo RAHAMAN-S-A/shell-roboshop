@@ -13,6 +13,7 @@ if [ $user_id -ne 0 ]; then
   echo "use root user"
   exit 1
   echo " sudo user "
+  
 mkdir -p $LOGS_FOLDER
 
 fi
