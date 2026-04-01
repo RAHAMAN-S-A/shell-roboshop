@@ -31,9 +31,7 @@ VALIDATE(){
         exit 1
     else
         echo "$2 ... SUCCESS" | tee -a $LOGS_FILE
-        exit 1
-    else
-       echo " $2 ....already installed ...skipping "    
+     
 
  fi
 }
@@ -41,13 +39,16 @@ VALIDATE(){
 
 dnf install nginx -y
 VALIDATE $? "installing nginx" | tee -a $LOGS_FILE
-sleep 10
+
 dnf install mysql -y
 VALIDATE $? "Installing Mysql" | tee -a $LOGS_FILE
-sleep 10
 
+if
 dnf install nodejs -y
 VALIDATE $? "Installing nodejs" | tee -a $LOGS_FILE
+else 
+   echo " already installed "
+fi
 
 
 for package in $@ # sudo sh 14-loops.sh nginx mysql nodejs
