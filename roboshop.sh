@@ -16,11 +16,12 @@ if [ $user_id -ne 0 ]; then
 mkdir -p $LOGS_FOLDER
 
 fi
+
 log(){
     echo -e "$(date "+%Y-%m-%d %H:%M:%S") | $1" | tee -a $LOGS_FILE
 }
 
-valadiate(){
+VALIDATE(){
     if [ $1 -ne 0 ]; then
         echo "$2 ... FAILURE"
         exit 1
