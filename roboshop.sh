@@ -23,21 +23,21 @@ log(){
 
 VALIDATE(){
     if [ $1 -ne 0 ]; then
-        echo "$2 ... FAILURE"
+        echo "$2 ... FAILURE" | tee -a $LOGS_FILE
         exit 1
     else
-        echo "$2 ... SUCCESS"
+        echo "$2 ... SUCCESS" | tee -a $LOGS_FILE
     fi
 }
 
 
 dnf install nginx -y
-validate $? " installing nginx "
+VALIDATE $? "installing nginx" | tee -a $LOGS_FILE
 sleep=10
 
 dnf install mysql -y
-VALIDATE $? "Installing Mysql"
+VALIDATE $? "Installing Mysql" | tee -a $LOGS_FILE
 sleep=10
 
 dnf install nodejs -y
-VALIDATE $? "Installing nodejs"
+VALIDATE $? "Installing nodejs" | tee -a $LOGS_FILE
